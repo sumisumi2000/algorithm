@@ -1,6 +1,8 @@
-numA = 4
-numB = 8
-numX = 2
+line = gets.split(' ')
+
+numA = line[0].to_i
+numB = line[1].to_i
+numX = line[2].to_i
 
 =begin オーバーフローを起こすのでダメっぽい
 # 割り切れる個数を保存
