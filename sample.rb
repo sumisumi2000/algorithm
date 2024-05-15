@@ -1,7 +1,21 @@
-a = gets.to_i
-b = gets.to_i
-x = gets.to_i
+w = gets.chomp
 
-answer = (a..b).inject(0) {|count,i| count += 1 if i % x == 0; count}
+# 文字数が奇数の時点で美しくない
+if w.length.odd?
+  puts 'No'
+  exit
+end
 
-puts answer
+# 文字ごとにグループ化
+group = w.split('').group_by(&:itself).map{ |key,value| [key,value.count]}.to_h
+
+group.each do |key,value|
+  # 文字数が奇数の時点で美しくない
+  if value.odd?
+    puts 'No'
+    exit
+  end
+end
+
+# 全てをくぐり抜けたら美しい
+puts 'Yes'
