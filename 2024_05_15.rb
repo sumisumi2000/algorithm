@@ -5,13 +5,15 @@ answer = true
 
 # 文字数別にグループ化して、配列のサイズが奇数なら false
 w.chomp.split('').group_by(&:itself).each_value do |value|
-  answer = false if value.size.odd?
-  break
+  if value.size.odd?
+    answer = false
+    break
+  end
 end
 
 # 出力
 if answer
-  p 'Yes'
+  puts 'Yes'
 else
-  p 'No'
+  puts 'No'
 end

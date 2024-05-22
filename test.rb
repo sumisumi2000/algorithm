@@ -1,19 +1,33 @@
-# 受け取り
-w = gets.chomp
-# 配列化
-array = w.split("")
-# 結果に使うresult変数を定義
-result = ""
-# 配列の要素を取り出し
-array.each do |a|
-  # 配列の要素を一つ取り出して、その要素と同一の要素を全て取り出して変数numberに格納
-  number = array.select { |a2| a2 == a }
-  # numberが奇数の場合はresultに"NO"を格納して繰り返しを強制終了
-  if number.count % 2 == 1
-    result = "No"
-    break
-  end
-  result = "Yes"
+# 入力：回数
+length = gets.to_i
+# 回数ぶん回す
+sentences = []
+length.times do
+  sentences << gets.chomp
 end
-# 結果を出力
-puts result
+
+# 入力した文字列の中で、それぞれの文字が何回出現しているかをハッシュで返す
+sentence_hash = sentences.map{ |sentence| sentence.split('').group_by(&:itself).map{ |key,value| [key,value.count]}.to_h }
+
+# ハッシュの数が少ない順にソート
+sentence_hash = sentence_hash.sort_by{ |hash| hash.values.max }.reverse
+
+# 一番少ないハッシュを取得
+answer = sentence_hash.shift
+delete_key = ''
+sentence_hash.each do |hash|
+  answer.each do |key,value|
+    if hash.has_key?(key)
+      word = hash[key]
+      count = word <= value ? word : value
+      answer[key] = count
+    else
+      delete_key = key
+    end
+  end
+  answer.delete(delete_key)
+end
+
+answer = answer.map{ |key,value| key * value }.join
+
+puts answer
