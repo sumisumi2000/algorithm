@@ -5,3 +5,5 @@ if b-a == c-b
 else
   puts "NO"
 end
+
+p 'stash のテスト１回目'
