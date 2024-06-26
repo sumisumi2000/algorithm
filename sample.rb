@@ -1,21 +1,17 @@
-N, x = gets.split.map(&:to_i)
-array = gets.split.map(&:to_i)
-
-candee = 0
-array.each_with_index do |num, i|
-  if i == 0
-    if num > x
-      array[i] = x
-      candee = candee + (num - x)
-    end
-  else
-    sum = array[i-1] + num
-    if sum > x
-      diff = sum - x
-      array[i] = num - diff
-      candee = candee + diff
-    end
-  end
+# N個の町とM本の道路
+N, M = gets.split.map(&:to_i)
+# 道路配列
+load_array = []
+# M本分入力を受け付ける
+M.times do
+  a1, b1 = gets.split.map(&:to_i)
+  # 配列にぶち込む
+  load_array << a1
+  load_array << b1
 end
 
-puts candee
+# 1から町の個数までカウントアップ
+1.upto(N) do |i|
+  # 配列内の各数字（町）の出現回数を表示
+  puts load_array.count(i)
+end

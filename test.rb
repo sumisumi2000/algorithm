@@ -1,33 +1,19 @@
-# 入力：回数
-length = gets.to_i
-# 回数ぶん回す
-sentences = []
-length.times do
-  sentences << gets.chomp
+n, m = gets.chomp.split.map(&:to_i)
+
+streets = []
+
+m.times do
+  t, y = gets.chomp.split.map(&:to_i)
+  streets << t
+  streets << y
 end
 
-# 入力した文字列の中で、それぞれの文字が何回出現しているかをハッシュで返す
-sentence_hash = sentences.map{ |sentence| sentence.split('').group_by(&:itself).map{ |key,value| [key,value.count]}.to_h }
+road_counts = Hash.new(0)
 
-# ハッシュの数が少ない順にソート
-sentence_hash = sentence_hash.sort_by{ |hash| hash.values.max }.reverse
-
-# 一番少ないハッシュを取得
-answer = sentence_hash.shift
-delete_key = ''
-sentence_hash.each do |hash|
-  answer.each do |key,value|
-    if hash.has_key?(key)
-      word = hash[key]
-      count = word <= value ? word : value
-      answer[key] = count
-    else
-      delete_key = key
-    end
-  end
-  answer.delete(delete_key)
+streets.each do |city|
+  road_counts[city] += 1
 end
 
-answer = answer.map{ |key,value| key * value }.join
-
-puts answer
+(1..n).each do |city|
+  puts road_counts[city]
+end
