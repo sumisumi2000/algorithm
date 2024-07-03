@@ -1,17 +1,17 @@
-# N個の町とM本の道路
-N, M = gets.split.map(&:to_i)
-# 道路配列
-load_array = []
-# M本分入力を受け付ける
-M.times do
-  a1, b1 = gets.split.map(&:to_i)
-  # 配列にぶち込む
-  load_array << a1
-  load_array << b1
+# 入力
+n, k = gets.split.map(&:to_i)
+d = gets.split(' ').map(&:to_i)
+
+# メソッド
+def remove_dislike_number(n, k, d)
+  all_number = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  available_number = all_number - d
+
+  combinations = available_number.repeated_permutation(n.to_s.length).to_a
+  combinations.each do |comb|
+    number = comb.join.to_i
+    return number if number >= n
+  end
 end
 
-# 1から町の個数までカウントアップ
-1.upto(N) do |i|
-  # 配列内の各数字（町）の出現回数を表示
-  puts load_array.count(i)
-end
+puts remove_dislike_number(n, k, d)
