@@ -1,19 +1,14 @@
-n, m = gets.chomp.split.map(&:to_i)
-
-streets = []
-
-m.times do
-  t, y = gets.chomp.split.map(&:to_i)
-  streets << t
-  streets << y
+N = gets.chomp.to_i
+hash = Hash.new{|h, key| h[key] = []}
+(N*2).times do |i|
+  num = gets.chomp.to_i
+  hash[num] << i
 end
 
-road_counts = Hash.new(0)
-
-streets.each do |city|
-  road_counts[city] += 1
+mix = 0
+hash.each do |k, v|
+  abs = (v[0] - v[1]).abs
+  mix += abs - 1
 end
 
-(1..n).each do |city|
-  puts road_counts[city]
-end
+puts "#{mix}\n"
