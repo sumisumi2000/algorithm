@@ -1,13 +1,11 @@
-array = (1..1000)
-
-sum = 0
-
-array.each do |num|
-  sum += num if num % 3 == 0 || num % 5 == 0
+module ConstArray
+  ARRAY = ["Ruby", "Java", "Go"].map!(&:freeze).freeze
 end
 
-puts sum
+ConstArray.freeze
 
-array = []
+ARRAY = ["Ruby", "Java", "Go"].map!(&:freeze).freeze
 
-p *(1..1000).class
+ARRAY = [1, 2, 3]
+
+p ARRAY

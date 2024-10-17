@@ -1,14 +1,9 @@
-N = gets.chomp.to_i
-hash = Hash.new{|h, key| h[key] = []}
-(N*2).times do |i|
-  num = gets.chomp.to_i
-  hash[num] << i
+def double(n)
+  n *= 2
 end
 
-mix = 0
-hash.each do |k, v|
-  abs = (v[0] - v[1]).abs
-  mix += abs - 1
-end
+num = 10
 
-puts "#{mix}\n"
+double(num)
+
+p num
